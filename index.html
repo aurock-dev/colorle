@@ -4,13 +4,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <script src="https://unpkg.com/uniqolor/dist/uniqolor.min.js" type="text/javascript"></script>
         <title>Colorle</title>
     </head>
     <body>
-        <div>
-            Guess the background color !
-        </div>
+        <div>Guess the background color !</div>
          
         <label for="r-color">Red intensity:
             <input type="number" name="r-color" id="r-color" value="255" min="0" max="255" step="1">
@@ -29,7 +30,7 @@
 
         <label for="guessed-color">Guessed color :</label>
         <div class="guessColor" id="guessed-color" name="guessed-color"></div>
-        
+
         <button id="guess-button">Guess</button>
         <div>Number of tries : <span id="guess-number">0</span></div>
 
