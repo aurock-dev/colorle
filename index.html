@@ -8,39 +8,32 @@
         <title>Colorle</title>
     </head>
     <body>
-        <!-- <button id="random-color">Random color</button> -->
+        <div>
+            Guess the background color !
+        </div>
          
-        <label for="r-color">R:
+        <label for="r-color">Red intensity:
             <input type="number" name="r-color" id="r-color" value="255" min="0" max="255" step="1">
         </label>
-        <div id="r-color-hint">
+        <div>Hint: <span id="r-color-hint">?</span></div>
 
-        </div>
-
-        <label for="g-color">G:
+        <label for="g-color">Green intensity:
             <input type="number" name="g-color" id="g-color" value="255" min="0" max="255" step="1">
         </label>
-        <div id="g-color-hint">
-            
-        </div>
+        <div>Hint: <span id="g-color-hint">?</span></div>
 
-        <label for="b-color">B:
+        <label for="b-color">Blue intensity:
             <input type="number" name="b-color" id="b-color" value="255" min="0" max="255" step="1">
         </label>
-        <div id="b-color-hint">
-            
-        </div>
+        <div>Hint: <span id="b-color-hint">?</span></div>
 
+        <label for="guessed-color">Guessed color :</label>
+        <div class="guessColor" id="guessed-color" name="guessed-color"></div>
+        
         <button id="guess-button">Guess</button>
-        <div>
-            Number of tries : <span id="guess-number">0</span>
-        </div>
-        <div class="guessColor" id="guessed-color">
+        <div>Number of tries : <span id="guess-number">0</span></div>
 
-        </div>
-        <div id="finish">
-            
-        </div>
+        <div id="finish"></div>
     </body>
     <script src="script.js"></script>
 </html>
