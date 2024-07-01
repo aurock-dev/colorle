@@ -13,6 +13,8 @@ function randomColor(){
     gColorToGuess = parseInt(colorValues[1]);
     bColorToGuess = parseInt(colorValues[2]);
 
+    console.log(color)
+
     document.body.style.backgroundColor = color.color;
     document.body.style.color = (rColorToGuess * 0.299 + gColorToGuess * 0.587 + bColorToGuess * 0.114) > 186 ? "#000000" : "#ffffff";
 }
@@ -68,7 +70,13 @@ function updateGuessNumber(){
 
 function checkIfFinish(rColor, gColor, bColor){
     if (rColor === rColorToGuess && gColor === gColorToGuess && bColor === bColorToGuess){
-        console.log("ok")
-        document.querySelector('#state-game-text').textContent = `Yay! You finish in ${guessNumber} tries!`
+        document.querySelector('#state-game-text').textContent = `Yay! You finish in ${guessNumber} tries!`;
+        let hexColor = rgbToHex(rColorToGuess, gColorToGuess, bColorToGuess)
+        document.querySelector('#color-reminder').textContent = `RGB : rgb(${rColorToGuess}, ${gColorToGuess}, ${bColorToGuess}) / HEX: ${hexColor}`;
+        document.querySelector('#color-reminder-container').classList.remove('hidden');
     }
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1).toUpperCase();
 }

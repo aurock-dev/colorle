@@ -11,7 +11,7 @@
         <title>Colorle</title>
     </head>
     <body>
-        <div>Guess the background color !</div>
+        <div>GUESS THE BACKGROUND COLOR!</div>
          
         <label for="r-color">Red intensity:
             <input type="number" name="r-color" id="r-color" value="255" min="0" max="255" step="1">
@@ -31,10 +31,10 @@
         <label for="guessed-color">Guessed color :</label>
         <div class="guessColor" id="guessed-color" name="guessed-color"></div>
 
-        <button id="guess-button">Guess</button>
+        <button id="guess-button">GUESS</button>
         <div id="state-game-text">Number of tries: <span id="guess-number">0</span></div>
 
-        <div id="finish"></div>
+        <div class="hidden" id="color-reminder-container">The color to guess was: <span id="color-reminder"></span></div>
     </body>
     <script src="script.js"></script>
 </html>

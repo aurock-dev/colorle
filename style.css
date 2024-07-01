@@ -178,3 +178,7 @@ body{
     height: 100px;
     background-color: var(--default-color);
 }
+
+body .hidden{
+    display: none;
+}
