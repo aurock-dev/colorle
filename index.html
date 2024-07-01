@@ -11,15 +11,36 @@
         <!-- <button id="random-color">Random color</button> -->
          
         <label for="r-color">R:
-            <input type="text" name="r-color">
+            <input type="number" name="r-color" id="r-color" value="255" min="0" max="255" step="1">
         </label>
+        <div id="r-color-hint">
+
+        </div>
+
         <label for="g-color">G:
-            <input type="text" name="g-color">
+            <input type="number" name="g-color" id="g-color" value="255" min="0" max="255" step="1">
         </label>
+        <div id="g-color-hint">
+            
+        </div>
+
         <label for="b-color">B:
-            <input type="text" name="b-color">
+            <input type="number" name="b-color" id="b-color" value="255" min="0" max="255" step="1">
         </label>
-        <button>Guess</button>
+        <div id="b-color-hint">
+            
+        </div>
+
+        <button id="guess-button">Guess</button>
+        <div>
+            Number of tries : <span id="guess-number">0</span>
+        </div>
+        <div class="guessColor" id="guessed-color">
+
+        </div>
+        <div id="finish">
+            
+        </div>
     </body>
     <script src="script.js"></script>
 </html>
