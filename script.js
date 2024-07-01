@@ -69,6 +69,6 @@ function updateGuessNumber(){
 function checkIfFinish(rColor, gColor, bColor){
     if (rColor === rColorToGuess && gColor === gColorToGuess && bColor === bColorToGuess){
         console.log("ok")
-        document.querySelector('#finish').textContent = `Yay ! You finish in ${guessNumber} tries !`
+        document.querySelector('#state-game-text').textContent = `Yay! You finish in ${guessNumber} tries!`
     }
 }
