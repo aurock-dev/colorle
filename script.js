@@ -13,8 +13,6 @@ function randomColor(){
     gColorToGuess = parseInt(colorValues[1]);
     bColorToGuess = parseInt(colorValues[2]);
 
-    console.log(color)
-
     document.body.style.backgroundColor = color.color;
     document.body.style.color = (rColorToGuess * 0.299 + gColorToGuess * 0.587 + bColorToGuess * 0.114) > 186 ? "#000000" : "#ffffff";
 }
