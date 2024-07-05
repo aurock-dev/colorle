@@ -24,7 +24,13 @@ function getTodayDate(){
 }
 
 function randomColor(){
-    checkIfAlreadyFinished();
+    try {
+        getLocalStorage()
+        checkIfAlreadyFinished();
+    } catch (error) {
+        setLocalStorage()
+    }
+
     let timestamp = new Date(getTodayDate()[0], getTodayDate()[1], getTodayDate()[2]).getTime();
 
     let seedRng = new Math.seedrandom(timestamp);
@@ -37,6 +43,7 @@ function randomColor(){
     bColorToGuess = bRandom;
 
     let colorToGuess = `rgb(${rRandom}, ${gRandom}, ${bRandom})`;
+    console.log(colorToGuess)
     document.body.style.backgroundColor = colorToGuess;
     document.body.style.color = (rColorToGuess * 0.299 + gColorToGuess * 0.587 + bColorToGuess * 0.114) > 186 ? "#000000" : "#ffffff";
 }
@@ -134,9 +141,7 @@ function checkIfFinish(rColor, gColor, bColor){
 }
 
 function checkIfAlreadyFinished(){
-    let isFinished = getLocalStorage().isFinished;
-
-    if (isFinished === 'true'){
+    if (getLocalStorage().isFinished === 'true'){
         document.querySelector('#state-game-text').textContent = `Yay! You finish in ${getLocalStorage().tries} tries!`;
         let hexColor = rgbToHex(getLocalStorage().rColorToGuess, getLocalStorage().gColorToGuess, getLocalStorage().bColorToGuess);
         document.querySelector('#color-reminder').textContent = `RGB : rgb(${getLocalStorage().rColorToGuess}, ${getLocalStorage().gColorToGuess}, ${getLocalStorage().bColorToGuess}) / HEX: ${hexColor}`;
@@ -151,10 +156,9 @@ function checkIfAlreadyFinished(){
         document.querySelector('#g-color').value = getLocalStorage().gColorToGuess;
         document.querySelector('#b-color').value = getLocalStorage().bColorToGuess;
 
+        document.querySelector('#guessed-color').style.backgroundColor = hexColor;
+
         document.querySelector('#guess-button').disabled = true;
-    }
-    else{
-        setLocalStorage();
     }
 }
 
