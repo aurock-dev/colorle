@@ -14,12 +14,18 @@ var rTries = 0;
 var gTries = 0;
 var bTries = 0;
 
-function randomColor(){
+function getTodayDate(){
     let date = new Date();
     let year = date.getFullYear();
     let month = date.getMonth();
     let day = date.getDay();
-    let timestamp = new Date(year, month, day).getTime(); 
+
+    return [year, month, day]
+}
+
+function randomColor(){
+    checkIfAlreadyFinished();
+    let timestamp = new Date(getTodayDate()[0], getTodayDate()[1], getTodayDate()[2]).getTime();
 
     let seedRng = new Math.seedrandom(timestamp);
     let rRandom = Math.floor(seedRng() * 255) + 0;
@@ -124,9 +130,74 @@ function checkIfFinish(rColor, gColor, bColor){
         document.querySelector('#colors-tries-container').classList.remove('hidden');
 
         document.querySelector('#guess-button').disabled = true;
+        updateLocalStorageWithFinishedData();
+    }
+}
+
+function checkIfAlreadyFinished(){
+    let isFinished = getLocalStorage().isFinished;
+
+    if (isFinished === 'true'){
+        document.querySelector('#state-game-text').textContent = `Yay! You finish in ${getLocalStorage().tries} tries!`;
+        let hexColor = rgbToHex(getLocalStorage().rColorToGuess, getLocalStorage().gColorToGuess, getLocalStorage().bColorToGuess);
+        document.querySelector('#color-reminder').textContent = `RGB : rgb(${getLocalStorage().rColorToGuess}, ${getLocalStorage().gColorToGuess}, ${getLocalStorage().bColorToGuess}) / HEX: ${hexColor}`;
+        document.querySelector('#color-reminder-container').classList.remove('hidden');
+
+        document.querySelector('#r-tries-number').textContent = getLocalStorage().rTries;
+        document.querySelector('#g-tries-number').textContent = getLocalStorage().gTries;
+        document.querySelector('#b-tries-number').textContent = getLocalStorage().bTries;
+        document.querySelector('#colors-tries-container').classList.remove('hidden');
+
+        document.querySelector('#r-color').value = getLocalStorage().rColorToGuess;
+        document.querySelector('#g-color').value = getLocalStorage().gColorToGuess;
+        document.querySelector('#b-color').value = getLocalStorage().bColorToGuess;
+
+        document.querySelector('#guess-button').disabled = true;
+    }
+    else{
+        setLocalStorage();
     }
 }
 
 function rgbToHex(r, g, b) {
     return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1).toUpperCase();
+}
+
+function getDateForLS(){
+    return `${getTodayDate()[0]}-${getTodayDate()[1]}-${getTodayDate()[2]}`;
+}
+
+function setLocalStorage(){
+    let data = {
+        isFinished: 'false',
+        'tries': 0,
+        'rTries': 0,
+        'gTries': 0,
+        'bTries': 0,
+        'rColorToGuess': 0,
+        'gColorToGuess': 0,
+        'bColorToGuess': 0 
+    }
+
+    localStorage.setItem(getDateForLS(), JSON.stringify(data));
+}
+
+function updateLocalStorageWithFinishedData(){
+    let data = {
+        isFinished: 'true',
+        'tries': tries,
+        'rTries': rTries,
+        'gTries': gTries,
+        'bTries': bTries,
+        'rColorToGuess': rColorToGuess,
+        'gColorToGuess': gColorToGuess,
+        'bColorToGuess': bColorToGuess 
+    }
+    
+    localStorage.setItem(getDateForLS(), JSON.stringify(data));
+}
+
+function getLocalStorage(){
+    let data = JSON.parse(localStorage.getItem(getDateForLS()));
+    return data;
 }
