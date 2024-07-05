@@ -4,11 +4,20 @@ document.querySelector('#guess-button').addEventListener('click', guessedColor, 
 var rColorToGuess;
 var bColorToGuess;
 var gColorToGuess;
-var guessNumber = 0
+
+var previousRColor = parseInt(document.querySelector('#r-color').value);
+var previousGColor = parseInt(document.querySelector('#g-color').value);
+var previousBColor = parseInt(document.querySelector('#b-color').value);
+
+var tries = 0; 
+var rTries = 0;
+var gTries = 0;
+var bTries = 0;
 
 function randomColor(){
     let color = uniqolor.random({format: 'rgb'});
     let colorValues = color.color.match(/\d+/g);
+    console.log(colorValues)
     rColorToGuess = parseInt(colorValues[0]);
     gColorToGuess = parseInt(colorValues[1]);
     bColorToGuess = parseInt(colorValues[2]);
@@ -21,6 +30,7 @@ function guessedColor(){
     let rColor = parseInt(document.querySelector('#r-color').value);
     let gColor = parseInt(document.querySelector('#g-color').value);
     let bColor = parseInt(document.querySelector('#b-color').value);
+
     let color = `rgb(${rColor}, ${gColor}, ${bColor})`;
     document.querySelector('#guessed-color').style.backgroundColor = color;
 
@@ -30,6 +40,12 @@ function guessedColor(){
 }
 
 function compareColors(rColor, gColor, bColor){
+    compareRColor(rColor);
+    compareGColor(gColor);
+    compareBColor(bColor);
+}
+
+function compareRColor(rColor){
     if (rColor > rColorToGuess){
         document.querySelector('#r-color-hint').textContent = "↓";
     }
@@ -40,6 +56,14 @@ function compareColors(rColor, gColor, bColor){
         document.querySelector('#r-color-hint').textContent = "✔";
     }
 
+    if (rColor !== previousRColor){
+        rTries += 1;
+        previousRColor = rColor;
+    }
+}
+
+function compareGColor(gColor){
+    
     if (gColor > gColorToGuess){
         document.querySelector('#g-color-hint').textContent = "↓";
     }
@@ -50,6 +74,13 @@ function compareColors(rColor, gColor, bColor){
         document.querySelector('#g-color-hint').textContent = "✔";
     }
 
+    if (gColor !== previousGColor){
+        gTries += 1;
+        previousGColor = gColor;
+    }
+}
+
+function compareBColor(bColor){
     if (bColor > bColorToGuess){
         document.querySelector('#b-color-hint').textContent = "↓";
     }
@@ -58,6 +89,11 @@ function compareColors(rColor, gColor, bColor){
     }
     else{
         document.querySelector('#b-color-hint').textContent = "✔";
+    }
+
+    if (bColor !== previousBColor){
+        bTries += 1;
+        previousBColor = bColor;
     }
 }
 
@@ -72,6 +108,11 @@ function checkIfFinish(rColor, gColor, bColor){
         let hexColor = rgbToHex(rColorToGuess, gColorToGuess, bColorToGuess);
         document.querySelector('#color-reminder').textContent = `RGB : rgb(${rColorToGuess}, ${gColorToGuess}, ${bColorToGuess}) / HEX: ${hexColor}`;
         document.querySelector('#color-reminder-container').classList.remove('hidden');
+
+        document.querySelector('#r-tries-number').textContent = rTries;
+        document.querySelector('#g-tries-number').textContent = gTries;
+        document.querySelector('#b-tries-number').textContent = bTries;
+        document.querySelector('#colors-tries-container').classList.remove('hidden');
     }
 }
 
