@@ -25,7 +25,7 @@ function guessedColor(){
     document.querySelector('#guessed-color').style.backgroundColor = color;
 
     compareColors(rColor, gColor, bColor);
-    updateGuessNumber();
+    updateTries();
     checkIfFinish(rColor, gColor, bColor);
 }
 
@@ -61,15 +61,15 @@ function compareColors(rColor, gColor, bColor){
     }
 }
 
-function updateGuessNumber(){
-    guessNumber += 1;
-    document.querySelector('#guess-number').textContent = guessNumber;
+function updateTries(){
+    tries += 1;
+    document.querySelector('#guess-number').textContent = tries;
 }
 
 function checkIfFinish(rColor, gColor, bColor){
     if (rColor === rColorToGuess && gColor === gColorToGuess && bColor === bColorToGuess){
-        document.querySelector('#state-game-text').textContent = `Yay! You finish in ${guessNumber} tries!`;
-        let hexColor = rgbToHex(rColorToGuess, gColorToGuess, bColorToGuess)
+        document.querySelector('#state-game-text').textContent = `Yay! You finish in ${tries} tries!`;
+        let hexColor = rgbToHex(rColorToGuess, gColorToGuess, bColorToGuess);
         document.querySelector('#color-reminder').textContent = `RGB : rgb(${rColorToGuess}, ${gColorToGuess}, ${bColorToGuess}) / HEX: ${hexColor}`;
         document.querySelector('#color-reminder-container').classList.remove('hidden');
     }
