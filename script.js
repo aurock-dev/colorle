@@ -37,7 +37,6 @@ function randomColor(){
     bColorToGuess = bRandom;
 
     let colorToGuess = `rgb(${rRandom}, ${gRandom}, ${bRandom})`;
-    console.log(colorToGuess)
     document.body.style.backgroundColor = colorToGuess;
     document.body.style.color = (rColorToGuess * 0.299 + gColorToGuess * 0.587 + bColorToGuess * 0.114) > 186 ? "#000000" : "#ffffff";
 }
