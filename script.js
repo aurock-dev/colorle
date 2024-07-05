@@ -17,7 +17,6 @@ var bTries = 0;
 function randomColor(){
     let color = uniqolor.random({format: 'rgb'});
     let colorValues = color.color.match(/\d+/g);
-    console.log(colorValues)
     rColorToGuess = parseInt(colorValues[0]);
     gColorToGuess = parseInt(colorValues[1]);
     bColorToGuess = parseInt(colorValues[2]);
@@ -63,7 +62,6 @@ function compareRColor(rColor){
 }
 
 function compareGColor(gColor){
-    
     if (gColor > gColorToGuess){
         document.querySelector('#g-color-hint').textContent = "↓";
     }
