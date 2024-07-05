@@ -15,13 +15,23 @@ var gTries = 0;
 var bTries = 0;
 
 function randomColor(){
-    let color = uniqolor.random({format: 'rgb'});
-    let colorValues = color.color.match(/\d+/g);
-    rColorToGuess = parseInt(colorValues[0]);
-    gColorToGuess = parseInt(colorValues[1]);
-    bColorToGuess = parseInt(colorValues[2]);
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth();
+    let day = date.getDay();
+    let timestamp = new Date(year, month, day).getTime(); 
 
-    document.body.style.backgroundColor = color.color;
+    let seedRng = new Math.seedrandom(timestamp);
+    let rRandom = Math.floor(seedRng() * 255) + 0;
+    let gRandom = Math.floor(seedRng() * 255) + 0;
+    let bRandom = Math.floor(seedRng() * 255) + 0;
+
+    rColorToGuess = rRandom;
+    gColorToGuess = gRandom;
+    bColorToGuess = bRandom;
+
+    let colorToGuess = `rgb(${rRandom}, ${gRandom}, ${bRandom})`;
+    document.body.style.backgroundColor = colorToGuess;
     document.body.style.color = (rColorToGuess * 0.299 + gColorToGuess * 0.587 + bColorToGuess * 0.114) > 186 ? "#000000" : "#ffffff";
 }
 
