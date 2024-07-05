@@ -155,6 +155,10 @@ function checkIfAlreadyFinished(){
         document.querySelector('#g-color').value = getLocalStorage().gColorToGuess;
         document.querySelector('#b-color').value = getLocalStorage().bColorToGuess;
 
+        document.querySelector('#r-color-hint').textContent = "✔";
+        document.querySelector('#g-color-hint').textContent = "✔";
+        document.querySelector('#b-color-hint').textContent = "✔";
+
         document.querySelector('#guessed-color').style.backgroundColor = hexColor;
 
         document.querySelector('#guess-button').disabled = true;
