@@ -63,7 +63,7 @@ function compareColors(rColor, gColor, bColor){
 
 function updateTries(){
     tries += 1;
-    document.querySelector('#guess-number').textContent = tries;
+    document.querySelector('#tries-number').textContent = tries;
 }
 
 function checkIfFinish(rColor, gColor, bColor){
