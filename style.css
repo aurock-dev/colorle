@@ -254,3 +254,9 @@ label{
     width: 8em;
     text-align: end;
 }
+
+.colorReminderContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
