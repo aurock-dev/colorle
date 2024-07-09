@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', randomColor, false);
 document.querySelector('#guess-button').addEventListener('click', guessedColor, false);
+document.querySelector('#r-range').addEventListener('input', updateInput, false);
+document.querySelector('#g-range').addEventListener('input', updateInput, false);
+document.querySelector('#b-range').addEventListener('input', updateInput, false);
 
 var rColorToGuess;
 var bColorToGuess;
@@ -207,4 +210,8 @@ function updateLocalStorageWithFinishedData(){
 function getLocalStorage(){
     let data = JSON.parse(localStorage.getItem(getDateForLS()));
     return data;
+}
+
+function updateInput(){
+    document.querySelector(`#${this.id.replace('-range', '-color')}`).value = this.value;
 }
