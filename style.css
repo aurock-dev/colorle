@@ -225,7 +225,7 @@ body>div{
     gap: 0.5em;
 }
 
-.guessColor{
+.triedColor{
     display: flex;
     align-items: center;
     justify-content: center;

@@ -53,8 +53,8 @@ function guessedColor(){
     let bColor = parseInt(document.querySelector('#b-color').value);
 
     let color = `rgb(${rColor}, ${gColor}, ${bColor})`;
-    document.querySelector('#guessed-color').style.backgroundColor = color;
-    document.querySelector('#guessed-color').style.color = (rColor * 0.299 + gColor * 0.587 + bColor * 0.114) > 186 ? "#000000" : "#ffffff";
+    document.querySelector('#tried-color').style.backgroundColor = color;
+    document.querySelector('#tried-color').style.color = (rColor * 0.299 + gColor * 0.587 + bColor * 0.114) > 186 ? "#000000" : "#ffffff";
 
     compareColors(rColor, gColor, bColor);
     updateTries();
@@ -160,7 +160,7 @@ function checkIfAlreadyFinished(){
         document.querySelector('#g-color-hint').textContent = "✔";
         document.querySelector('#b-color-hint').textContent = "✔";
 
-        document.querySelector('#guessed-color').style.backgroundColor = hexColor;
+        document.querySelector('#tried-color').style.backgroundColor = hexColor;
 
         document.querySelector('#guess-button').disabled = true;
     }
