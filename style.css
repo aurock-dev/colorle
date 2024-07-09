@@ -200,7 +200,7 @@ button:active{
     background-color: var(--clicked-color);
 }
 
-input{
+input[type="number"]{
     outline: none;
     border-radius: 5px;
     border: var(--border-thickness) solid var(--default-color);
@@ -208,8 +208,24 @@ input{
     padding: 0.3em 0.5em;
 }
 
-input:focus{
+input[type="number"]:focus{
     border: var(--border-thickness) solid var(--header-color);
+}
+
+input[type="range"]{
+    width: 100%;
+}
+
+input[type="range"].rRange{
+    accent-color: var(--rInput-color);
+}
+
+input[type="range"].gRange{
+    accent-color: var(--gInput-color);
+}
+
+input[type="range"].bRange{
+    accent-color: var(--bInput-color);
 }
 
 body .hidden{
@@ -267,14 +283,14 @@ label{
     align-items: center; 
 }
 
-.rInput{
+[type="number"].rInput{
     border-color: var(--rInput-color);
 }
 
-.gInput{
+[type="number"].gInput{
     border-color: var(--gInput-color);
 }
 
-.bInput{
+[type="number"].bInput{
     border-color: var(--bInput-color);
 }
