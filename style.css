@@ -163,6 +163,10 @@
     --clicked-color: rgb(207, 207, 207);
     --header-color: rgb(62, 62, 63);
 
+    --rInput-color: rgb(255, 117, 117);
+    --gInput-color: rgb(85, 252, 80);
+    --bInput-color: rgb(95, 133, 247);
+
     --title-background-color: rgba(0,0,0,0.1);
     --box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.2);
 }
@@ -259,4 +263,16 @@ label{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.rInput{
+    border-color: var(--rInput-color);
+}
+
+.gInput{
+    border-color: var(--gInput-color);
+}
+
+.bInput{
+    border-color: var(--bInput-color);
 }
