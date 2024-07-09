@@ -160,6 +160,7 @@
 /* #region -- ROOT */
 :root{
     --default-color: rgb(255, 255, 255);
+    --header-color: rgb(62, 62, 63);
 }
 /* #endregion */
 
@@ -171,6 +172,14 @@ body{
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0.2em;
+    background-color: var(--header-color);
 }
 
 .guessColor{
