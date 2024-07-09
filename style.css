@@ -163,9 +163,11 @@
     --clicked-color: rgb(207, 207, 207);
     --header-color: rgb(62, 62, 63);
 
-    --rInput-color: rgb(255, 117, 117);
-    --gInput-color: rgb(85, 252, 80);
-    --bInput-color: rgb(95, 133, 247);
+    --rInput-color: red;
+    --gInput-color: green;
+    --bInput-color: blue;
+
+    --border-thickness: 2px;
 
     --title-background-color: rgba(0,0,0,0.1);
     --box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.2);
@@ -201,13 +203,13 @@ button:active{
 input{
     outline: none;
     border-radius: 5px;
-    border: 1px solid var(--default-color);
+    border: var(--border-thickness) solid var(--default-color);
     background-color: var(--default-color);
     padding: 0.3em 0.5em;
 }
 
 input:focus{
-    border: 1px solid var(--header-color);
+    border: var(--border-thickness) solid var(--header-color);
 }
 
 body .hidden{
