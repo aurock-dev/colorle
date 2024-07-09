@@ -50,13 +50,15 @@
         
         <div>
             <button id="guess-button">GUESS</button>
-            <div id="state-game-text">Number of tries: <span id="tries-number">0</span></div>
-            <div class="hidden" id="colors-tries-container">
-                Red tries: <span id="r-tries-number"></span> /
-                Green tries: <span  id="g-tries-number"></span> /
-                Blue tries: <span  id="b-tries-number"></span>
+            <div class="reminderContainer">
+                <div id="state-game-text">Number of tries: <span id="tries-number">0</span></div>
+                <div class="hidden" id="colors-tries-container">
+                    Red tries: <span id="r-tries-number"></span> -
+                    Green tries: <span  id="g-tries-number"></span> -
+                    Blue tries: <span  id="b-tries-number"></span>
+                </div>
             </div>
-            <div class="colorReminderContainer hidden" id="color-reminder-container">
+            <div class="reminderContainer title hidden" id="color-reminder-container">
                 The color to guess was: 
                 <div id="color-reminder"></di>
             </div>

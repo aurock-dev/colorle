@@ -226,7 +226,7 @@ body>div{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5em;
+    gap: 1em;
 }
 
 .triedColor{
@@ -259,10 +259,10 @@ label{
     text-align: end;
 }
 
-.colorReminderContainer{
+.reminderContainer{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
 }
 
 .rInput{
