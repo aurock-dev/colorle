@@ -209,6 +209,18 @@ button:active{
     background-color: var(--clicked-color);
 }
 
+input{
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid var(--default-color);
+    background-color: var(--default-color);
+    padding: 0.3em 0.5em;
+}
+
+input:focus{
+    border: 1px solid var(--header-color);
+}
+
 body .hidden{
     display: none;
 }
