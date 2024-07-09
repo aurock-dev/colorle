@@ -160,6 +160,17 @@
 /* #region -- ROOT */
 :root{
     --default-color: rgb(255, 255, 255);
+    --clicked-color: rgb(207, 207, 207);
+    --header-color: rgb(62, 62, 63);
+
+    --rInput-color: red;
+    --gInput-color: green;
+    --bInput-color: blue;
+
+    --border-thickness: 2px;
+
+    --title-background-color: rgba(0,0,0,0.1);
+    --box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.2);
 }
 /* #endregion */
 
@@ -173,12 +184,97 @@ body{
     font-style: normal;
 }
 
-.guessColor{
-    width: 100px;
-    height: 100px;
+button{
+    border: none;
+    border-radius: 5px;
+    padding: 0.6em 1.5em;
+    font-weight: 600;
     background-color: var(--default-color);
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+button:active{
+    background-color: var(--clicked-color);
+}
+
+input{
+    outline: none;
+    border-radius: 5px;
+    border: var(--border-thickness) solid var(--default-color);
+    background-color: var(--default-color);
+    padding: 0.3em 0.5em;
+}
+
+input:focus{
+    border: var(--border-thickness) solid var(--header-color);
 }
 
 body .hidden{
     display: none;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0.2em;
+    background-color: var(--header-color);
+}
+
+body>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.triedColor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    color: #000;
+    background-color: var(--default-color);
+    box-shadow: var(--box-shadow);
+}
+
+.title{
+    border-radius: 5px;
+    padding: 1em 2em;
+    background-color: var(--title-background-color);
+}
+
+label{
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+}
+
+.titleColor{
+    width: 8em;
+    text-align: end;
+}
+
+.reminderContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.rInput{
+    border-color: var(--rInput-color);
+}
+
+.gInput{
+    border-color: var(--gInput-color);
+}
+
+.bInput{
+    border-color: var(--bInput-color);
 }

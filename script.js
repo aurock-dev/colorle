@@ -53,7 +53,8 @@ function guessedColor(){
     let bColor = parseInt(document.querySelector('#b-color').value);
 
     let color = `rgb(${rColor}, ${gColor}, ${bColor})`;
-    document.querySelector('#guessed-color').style.backgroundColor = color;
+    document.querySelector('#tried-color').style.backgroundColor = color;
+    document.querySelector('#tried-color').style.color = (rColor * 0.299 + gColor * 0.587 + bColor * 0.114) > 186 ? "#000000" : "#ffffff";
 
     compareColors(rColor, gColor, bColor);
     updateTries();
@@ -126,7 +127,7 @@ function checkIfFinish(rColor, gColor, bColor){
     if (rColor === rColorToGuess && gColor === gColorToGuess && bColor === bColorToGuess){
         document.querySelector('#state-game-text').textContent = `Yay! You finish in ${tries} tries!`;
         let hexColor = rgbToHex(rColorToGuess, gColorToGuess, bColorToGuess);
-        document.querySelector('#color-reminder').textContent = `RGB : rgb(${rColorToGuess}, ${gColorToGuess}, ${bColorToGuess}) / HEX: ${hexColor}`;
+        document.querySelector('#color-reminder').textContent = `rgb(${rColorToGuess}, ${gColorToGuess}, ${bColorToGuess}) / ${hexColor}`;
         document.querySelector('#color-reminder-container').classList.remove('hidden');
 
         document.querySelector('#r-tries-number').textContent = rTries;
@@ -143,7 +144,7 @@ function checkIfAlreadyFinished(){
     if (getLocalStorage().isFinished === 'true'){
         document.querySelector('#state-game-text').textContent = `Yay! You finish in ${getLocalStorage().tries} tries!`;
         let hexColor = rgbToHex(getLocalStorage().rColorToGuess, getLocalStorage().gColorToGuess, getLocalStorage().bColorToGuess);
-        document.querySelector('#color-reminder').textContent = `RGB : rgb(${getLocalStorage().rColorToGuess}, ${getLocalStorage().gColorToGuess}, ${getLocalStorage().bColorToGuess}) / HEX: ${hexColor}`;
+        document.querySelector('#color-reminder').textContent = `rgb(${getLocalStorage().rColorToGuess}, ${getLocalStorage().gColorToGuess}, ${getLocalStorage().bColorToGuess}) / ${hexColor}`;
         document.querySelector('#color-reminder-container').classList.remove('hidden');
 
         document.querySelector('#r-tries-number').textContent = getLocalStorage().rTries;
@@ -159,7 +160,7 @@ function checkIfAlreadyFinished(){
         document.querySelector('#g-color-hint').textContent = "✔";
         document.querySelector('#b-color-hint').textContent = "✔";
 
-        document.querySelector('#guessed-color').style.backgroundColor = hexColor;
+        document.querySelector('#tried-color').style.backgroundColor = hexColor;
 
         document.querySelector('#guess-button').disabled = true;
     }

@@ -11,35 +11,58 @@
         <title>Colorle</title>
     </head>
     <body>
-        <div>GUESS THE TODAY BACKGROUND COLOR!</div>
+        <header>
+            COLORLE
+        </header>
+
+        <div class="title">GUESS THE TODAY BACKGROUND COLOR!</div>
          
-        <label for="r-color">Red intensity:
-            <input type="number" name="r-color" id="r-color" value="255" min="0" max="255" step="1">
-        </label>
-        <div>Hint: <span id="r-color-hint">?</span></div>
-
-        <label for="g-color">Green intensity:
-            <input type="number" name="g-color" id="g-color" value="255" min="0" max="255" step="1">
-        </label>
-        <div>Hint: <span id="g-color-hint">?</span></div>
-
-        <label for="b-color">Blue intensity:
-            <input type="number" name="b-color" id="b-color" value="255" min="0" max="255" step="1">
-        </label>
-        <div>Hint: <span id="b-color-hint">?</span></div>
-
-        <label for="guessed-color">Guessed color:</label>
-        <div class="guessColor" id="guessed-color" name="guessed-color"></div>
-
-        <button id="guess-button">GUESS</button>
-        <div id="state-game-text">Number of tries: <span id="tries-number">0</span></div>
-        <div class="hidden" id="colors-tries-container">
-            Red tries: <span id="r-tries-number"></span> / 
-            Green tries: <span  id="g-tries-number"></span> / 
-            Blue tries: <span  id="b-tries-number"></span>
+        <div>
+            <label for="r-color">
+                <span class="titleColor">Red intensity:</span>
+                <input class="rInput" type="number" name="r-color" id="r-color" value="255" min="0" max="255" step="1">
+                <span id="r-color-hint">?</span>
+            </label>
         </div>
 
-        <div class="hidden" id="color-reminder-container">The color to guess was: <span id="color-reminder"></span></div>
+        <div>
+            <label for="g-color">
+                <span class="titleColor">Green intensity:</span>
+                <input class="gInput" type="number" name="g-color" id="g-color" value="255" min="0" max="255" step="1">
+                <span id="g-color-hint">?</span>
+            </label>
+        </div>
+
+        <div>
+            <label for="b-color">
+                <span class="titleColor">Blue intensity:</span>
+                <input class="bInput" type="number" name="b-color" id="b-color" value="255" min="0" max="255" step="1">
+                <span id="b-color-hint">?</span>
+            </label>
+        </div>
+
+        <div>
+            <span>Tried color:</span>
+            <div class="triedColor" id="tried-color"></div>
+        </div>
+        
+        <!-- <div class="guessColor" id="guessed-color">Guessed color</div> -->
+        
+        <div>
+            <button id="guess-button">GUESS</button>
+            <div class="reminderContainer">
+                <div id="state-game-text">Number of tries: <span id="tries-number">0</span></div>
+                <div class="hidden" id="colors-tries-container">
+                    Red tries: <span id="r-tries-number"></span> -
+                    Green tries: <span  id="g-tries-number"></span> -
+                    Blue tries: <span  id="b-tries-number"></span>
+                </div>
+            </div>
+            <div class="reminderContainer title hidden" id="color-reminder-container">
+                The color to guess was: 
+                <div id="color-reminder"></di>
+            </div>
+        </div>
     </body>
     <script src="script.js"></script>
 </html>
