@@ -13,8 +13,13 @@ let rTries = 0;
 let gTries = 0;
 let bTries = 0;
 
+let dateNextColor = new Date;
+dateNextColor.setHours(0, 0, 0);
+dateNextColor.setDate(dateNextColor.getDate() + 1);
+
 function setupPage(){
     randomColor();
+    timeLeft();
     lucide.createIcons();
 
     document.querySelector('#guess-button').addEventListener('click', guessedColor, false);
@@ -31,6 +36,19 @@ function setupPage(){
     document.querySelectorAll('[data-lucide="plus"]').forEach((button) => {
         button.addEventListener('click', plusInput, false)
     })
+}
+
+function timeLeft(){
+    let dateNow = new Date;
+    let remain = Math.floor(((dateNextColor - dateNow) / 1000));
+    let hh = ("0" + parseInt((remain / 60 / 60) % 60)).slice(-2);
+    let mm = ("0" + parseInt((remain / 60) % 60)).slice(-2);
+    let ss = ("0" + parseInt(remain % 60)).slice(-2);
+
+    let timeCounter = `${hh}:${mm}:${ss}`;
+    document.querySelector('#time').textContent = timeCounter;
+ 
+    setTimeout(timeLeft, 1000);
 }
 
 function getTodayDate(){
