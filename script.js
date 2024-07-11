@@ -1,21 +1,37 @@
-document.addEventListener('DOMContentLoaded', randomColor, false);
-document.querySelector('#guess-button').addEventListener('click', guessedColor, false);
-document.querySelector('#r-range').addEventListener('input', updateInput, false);
-document.querySelector('#g-range').addEventListener('input', updateInput, false);
-document.querySelector('#b-range').addEventListener('input', updateInput, false);
+document.addEventListener('DOMContentLoaded', setupPage, false);
 
-var rColorToGuess;
-var bColorToGuess;
-var gColorToGuess;
+let rColorToGuess;
+let bColorToGuess;
+let gColorToGuess;
 
-var previousRColor = parseInt(document.querySelector('#r-color').value);
-var previousGColor = parseInt(document.querySelector('#g-color').value);
-var previousBColor = parseInt(document.querySelector('#b-color').value);
+let previousRColor = parseInt(document.querySelector('#r-color').value);
+let previousGColor = parseInt(document.querySelector('#g-color').value);
+let previousBColor = parseInt(document.querySelector('#b-color').value);
 
-var tries = 0; 
-var rTries = 0;
-var gTries = 0;
-var bTries = 0;
+let tries = 0; 
+let rTries = 0;
+let gTries = 0;
+let bTries = 0;
+
+function setupPage(){
+    randomColor();
+    lucide.createIcons();
+
+    document.querySelector('#guess-button').addEventListener('click', guessedColor, false);
+    document.querySelector('#r-range').addEventListener('input', updateInput, false);
+    document.querySelector('#g-range').addEventListener('input', updateInput, false);
+    document.querySelector('#b-range').addEventListener('input', updateInput, false);
+    document.querySelectorAll('input[type="number"]').forEach((input) => {
+       input.addEventListener('input', checkInput, false)
+    });
+    
+    document.querySelectorAll('[data-lucide="minus"]').forEach((button) => {
+        button.addEventListener('click', minusInput, false)
+    })
+    document.querySelectorAll('[data-lucide="plus"]').forEach((button) => {
+        button.addEventListener('click', plusInput, false)
+    })
+}
 
 function getTodayDate(){
     let date = new Date();
@@ -214,4 +230,28 @@ function getLocalStorage(){
 
 function updateInput(){
     document.querySelector(`#${this.id.replace('-range', '-color')}`).value = this.value;
+}
+
+function checkInput(){
+    this.value = Math.min(255, Math.max(0, this.value));
+}
+
+function minusInput(){
+    let inputTarget = document.querySelector(`#${this.id.replace('-minus', '-color')}`);
+    let inputValue = parseInt(inputTarget.value);
+    inputTarget.value = Math.max(inputValue - 1, 0);
+    
+    let rangeTarget = document.querySelector(`#${this.id.replace('-minus', '-range')}`);
+    let rangeValue = parseInt(rangeTarget.value);
+    rangeTarget.value = Math.max(rangeValue - 1, 0);
+}
+
+function plusInput(){
+    let inputTarget = document.querySelector(`#${this.id.replace('-plus', '-color')}`);
+    let inputValue = parseInt(inputTarget.value);
+    inputTarget.value = Math.min(inputValue + 1, 255);
+    
+    let rangeTarget = document.querySelector(`#${this.id.replace('-plus', '-range')}`);
+    let rangeValue = parseInt(rangeTarget.value);
+    rangeTarget.value = Math.min(rangeValue + 1, 255);
 }
