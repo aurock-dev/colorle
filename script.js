@@ -215,3 +215,7 @@ function getLocalStorage(){
 function updateInput(){
     document.querySelector(`#${this.id.replace('-range', '-color')}`).value = this.value;
 }
+
+function checkInput(){
+    this.value = Math.min(255, Math.max(0, this.value));
+}
