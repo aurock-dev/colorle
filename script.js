@@ -1,21 +1,15 @@
-document.addEventListener('DOMContentLoaded', randomColor, false);
-document.querySelector('#guess-button').addEventListener('click', guessedColor, false);
-document.querySelector('#r-range').addEventListener('input', updateInput, false);
-document.querySelector('#g-range').addEventListener('input', updateInput, false);
-document.querySelector('#b-range').addEventListener('input', updateInput, false);
+let rColorToGuess;
+let bColorToGuess;
+let gColorToGuess;
 
-var rColorToGuess;
-var bColorToGuess;
-var gColorToGuess;
+let previousRColor = parseInt(document.querySelector('#r-color').value);
+let previousGColor = parseInt(document.querySelector('#g-color').value);
+let previousBColor = parseInt(document.querySelector('#b-color').value);
 
-var previousRColor = parseInt(document.querySelector('#r-color').value);
-var previousGColor = parseInt(document.querySelector('#g-color').value);
-var previousBColor = parseInt(document.querySelector('#b-color').value);
-
-var tries = 0; 
-var rTries = 0;
-var gTries = 0;
-var bTries = 0;
+let tries = 0; 
+let rTries = 0;
+let gTries = 0;
+let bTries = 0;
 
 function getTodayDate(){
     let date = new Date();
