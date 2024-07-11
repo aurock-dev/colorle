@@ -294,3 +294,14 @@ label{
 [type="number"].bInput{
     border-color: var(--bInput-color);
 }
+
+.colorInputContainer{
+    width: 100%;
+    padding: 0em 1em;
+}
+
+.sliderContainer{
+    display: flex;
+    width: 100%;
+    gap: 1em;
+}

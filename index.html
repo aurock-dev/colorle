@@ -8,6 +8,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+        <script src="https://unpkg.com/lucide@latest"></script>
         <title>Colorle</title>
     </head>
     <body>
@@ -17,31 +18,43 @@
 
         <div class="title">GUESS THE TODAY BACKGROUND COLOR!</div>
          
-        <div>
+        <div class="colorInputContainer">
             <label for="r-color">
                 <span class="titleColor">Red intensity:</span>
                 <input class="rInput" type="number" name="r-color" id="r-color" value="255" min="0" max="255" step="1">
                 <span id="r-color-hint">?</span>
             </label>
-            <input class="rRange" id="r-range" type="range" value="255" min="0" max="255" step="1">
+            <div class="sliderContainer">
+                <i data-lucide="minus" id="r-minus"></i>
+                <input class="rRange" id="r-range" type="range" value="255" min="0" max="255" step="1">
+                <i data-lucide="plus" id="r-plus"></i>
+            </div>
         </div>
 
-        <div>
+        <div class="colorInputContainer">
             <label for="g-color">
                 <span class="titleColor">Green intensity:</span>
                 <input class="gInput" type="number" name="g-color" id="g-color" value="255" min="0" max="255" step="1">
                 <span id="g-color-hint">?</span>
             </label>
-            <input class="gRange" id="g-range" type="range" value="255" min="0" max="255" step="1">
+            <div class="sliderContainer">
+                <i data-lucide="minus" id="g-minus"></i>
+                <input class="gRange" id="g-range" type="range" value="255" min="0" max="255" step="1">
+                <i data-lucide="plus" id="g-plus"></i>
+            </div>
         </div>
 
-        <div>
+        <div class="colorInputContainer">
             <label for="b-color">
                 <span class="titleColor">Blue intensity:</span>
                 <input class="bInput" type="number" name="b-color" id="b-color" value="255" min="0" max="255" step="1">
                 <span id="b-color-hint">?</span>
             </label>
-            <input class="bRange" id="b-range" type="range" value="255" min="0" max="255" step="1">
+            <div class="sliderContainer">
+                <i data-lucide="minus" id="b-minus"></i>
+                <input class="bRange" id="b-range" type="range" value="255" min="0" max="255" step="1">
+                <i data-lucide="plus" id="b-plus"></i>
+            </div>
         </div>
 
         <div>
