@@ -210,6 +210,11 @@ function applyFinishGame(){
     document.querySelector('#tried-color').style.backgroundColor = hexColor;
 
     document.querySelector('#guess-button').disabled = true;
+
+    document.querySelectorAll('[data-lucide="copy"]').forEach((copyButton) => {
+        copyButton.classList.remove('hidden');
+    });
+    
 }
 
 function rgbToHex(r, g, b) {
