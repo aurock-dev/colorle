@@ -241,6 +241,21 @@ header{
     background-color: var(--header-color);
 }
 
+header > div:first-child{
+    display: flex;
+    gap: 0.2em;
+}
+
+header > div:last-child{
+    display: flex;
+    gap: 0.2em;
+    justify-content: start;
+}
+
+header div:last-child div{
+    min-width: 70px;
+}
+
 body>div{
     display: flex;
     flex-direction: column;
