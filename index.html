@@ -22,7 +22,10 @@
                 <i class="iconButton" data-lucide="menu"></i>
             </div>
             <div class="menu hidden" id="menu">
-                Menu
+                <div class="iconButton" id="menu-help" name="menu-element">
+                    <i data-lucide="book-marked"></i>
+                    Aide
+                </div>
             </div>
         </header>
 
@@ -91,11 +94,15 @@
                 <i class="copyButton iconButton hidden" data-lucide="copy"></i>
                 <span name="toCopy">
                     The color to guess was:
-                    <div id="color-reminder"></di>
-                </div>
-            </span>
+                    <div id="color-reminder"></div>
+                </span>
+            </div>
         </div>
         <div id="snackbar">Copied to clipboard!</div>
+
+        <dialog id="dialog-help">
+            Try to guess the background color by changing Red, Green and Blue intensity.
+        </dialog>
     </body>
     <script src="script.js"></script>
 </html>

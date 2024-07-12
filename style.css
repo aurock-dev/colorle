@@ -240,6 +240,7 @@ header{
     width: 100%;
     padding: 0.2em 0.5em;
     background-color: var(--header-color);
+    box-shadow: var(--box-shadow);
 }
 
 header > div:first-child{
@@ -258,9 +259,23 @@ header div:last-child div{
 }
 
 .menu{
+    z-index: 1;
     position: absolute;
-    right: 0;
-    top: 100%;
+    right: 0.2em;
+    top: 2em;
+    padding: 0.5em;
+    border-radius: 5px;
+    background-color: var(--header-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    min-width: 8em;
+    box-shadow: var(--box-shadow);
+}
+
+.menu > div{
+    display: flex;
+    gap: 0.5em;
 }
 
 body>div{
@@ -350,7 +365,7 @@ label{
 
 #snackbar {
     visibility: hidden;
-    min-width: 200px;
+    max-width: 200px;
     margin-left: -100px;
     background-color: var(--snackbar-background-color);
     color: var(--default-color);
@@ -365,4 +380,15 @@ label{
 
 #snackbar.show {
     visibility: visible;
+}
+
+body dialog{
+    margin: auto auto;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+dialog::backdrop{
+    background-color: var(--snackbar-background-color);
 }

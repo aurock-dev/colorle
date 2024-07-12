@@ -40,6 +40,10 @@ function setupPage(){
         button.addEventListener('click', copy, false)
     })
     document.querySelector('[data-lucide="menu"]').addEventListener('click', toggleMenu, false)
+    document.querySelectorAll('[name="menu-element"]').forEach((menuElement) => {
+        menuElement.addEventListener('click', showDialog, false)  
+    });
+    document.querySelector('dialog').addEventListener('click', closeDialog, false)
 }
 
 function timeLeft(){
@@ -300,4 +304,12 @@ function copy(){
 
 function toggleMenu(){
     document.querySelector('#menu').classList.toggle('hidden');
+}
+
+function showDialog(){
+    document.querySelector(`#${this.id.replace('menu', 'dialog')}`).showModal();
+}
+
+function closeDialog(){
+    document.querySelector(`#${this.id}`).close();
 }
