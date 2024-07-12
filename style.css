@@ -192,11 +192,11 @@ button{
     background-color: var(--default-color);
 }
 
-button:hover{
+button:hover:not('disabled'){
     cursor: pointer;
 }
 
-button:active{
+button:active:not('disabled'){
     background-color: var(--clicked-color);
 }
 
@@ -283,15 +283,15 @@ label{
     align-items: center; 
 }
 
-[type="number"].rInput{
+[type="number"].rInput:not('disabled'){
     border-color: var(--rInput-color);
 }
 
-[type="number"].gInput{
+[type="number"].gInput:not('disabled'){
     border-color: var(--gInput-color);
 }
 
-[type="number"].bInput{
+[type="number"].bInput:not('disabled'){
     border-color: var(--bInput-color);
 }
 
