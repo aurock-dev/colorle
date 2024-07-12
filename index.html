@@ -13,10 +13,19 @@
     </head>
     <body>
         <header>
-            <div>COLORLE</div>
             <div>
-                Time left until next color : 
-                <span id="time"></span>
+                Time left until next color: 
+                <div id="time"></div>
+            </div>
+            <div>
+                <div>COLORLE</div>
+                <i class="iconButton" data-lucide="menu"></i>
+            </div>
+            <div class="menu hidden" id="menu">
+                <div class="iconButton" id="menu-help" name="menu-element">
+                    <i data-lucide="book-marked"></i>
+                    Aide
+                </div>
             </div>
         </header>
 
@@ -29,9 +38,9 @@
                 <span id="r-color-hint">?</span>
             </label>
             <div class="sliderContainer">
-                <i data-lucide="minus" id="r-minus"></i>
+                <i class="iconButton" data-lucide="minus" id="r-minus"></i>
                 <input class="rRange" id="r-range" type="range" value="255" min="0" max="255" step="1">
-                <i data-lucide="plus" id="r-plus"></i>
+                <i class="iconButton" data-lucide="plus" id="r-plus"></i>
             </div>
         </div>
 
@@ -42,9 +51,9 @@
                 <span id="g-color-hint">?</span>
             </label>
             <div class="sliderContainer">
-                <i data-lucide="minus" id="g-minus"></i>
+                <i class="iconButton" data-lucide="minus" id="g-minus"></i>
                 <input class="gRange" id="g-range" type="range" value="255" min="0" max="255" step="1">
-                <i data-lucide="plus" id="g-plus"></i>
+                <i class="iconButton" data-lucide="plus" id="g-plus"></i>
             </div>
         </div>
 
@@ -55,9 +64,9 @@
                 <span id="b-color-hint">?</span>
             </label>
             <div class="sliderContainer">
-                <i data-lucide="minus" id="b-minus"></i>
+                <i class="iconButton" data-lucide="minus" id="b-minus"></i>
                 <input class="bRange" id="b-range" type="range" value="255" min="0" max="255" step="1">
-                <i data-lucide="plus" id="b-plus"></i>
+                <i class="iconButton" data-lucide="plus" id="b-plus"></i>
             </div>
         </div>
 
@@ -71,7 +80,7 @@
         <div>
             <button id="guess-button">GUESS</button>
             <div class="reminderContainer">
-                <i class="copyButton" data-lucide="copy" id="copy-solution"></i>
+                <i class="copyButton iconButton hidden" data-lucide="copy"></i>
                 <span name="toCopy">
                     <div id="state-game-text">Number of tries: <span id="tries-number">0</span></div>
                     <div class="hidden" id="colors-tries-container">
@@ -82,14 +91,18 @@
                 </span>
             </div>
             <div class="reminderContainer hidden" id="color-reminder-container">
-                <i class="copyButton" data-lucide="copy" id="copy-solution"></i>
+                <i class="copyButton iconButton hidden" data-lucide="copy"></i>
                 <span name="toCopy">
                     The color to guess was:
-                    <div id="color-reminder"></di>
-                </div>
-            </span>
+                    <div id="color-reminder"></div>
+                </span>
+            </div>
         </div>
         <div id="snackbar">Copied to clipboard!</div>
+
+        <dialog id="dialog-help">
+            Try to guess the background color by changing Red, Green and Blue intensity.
+        </dialog>
     </body>
     <script src="script.js"></script>
 </html>

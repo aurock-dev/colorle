@@ -22,6 +22,11 @@ function setupPage(){
     timeLeft();
     lucide.createIcons();
 
+    window.addEventListener('click', (e) => {
+        if (e.target.closest('svg') !== document.querySelector('[data-lucide="menu"]')) {
+            document.querySelector('#menu').classList.add('hidden');
+        }
+    }, false)
     document.querySelector('#guess-button').addEventListener('click', guessedColor, false);
     document.querySelector('#r-range').addEventListener('input', updateInput, false);
     document.querySelector('#g-range').addEventListener('input', updateInput, false);
@@ -39,6 +44,11 @@ function setupPage(){
     document.querySelectorAll('[data-lucide="copy"]').forEach((button) => {
         button.addEventListener('click', copy, false)
     })
+    document.querySelector('[data-lucide="menu"]').addEventListener('click', toggleMenu, false)
+    document.querySelectorAll('[name="menu-element"]').forEach((menuElement) => {
+        menuElement.addEventListener('click', showDialog, false)  
+    });
+    document.querySelector('dialog').addEventListener('click', closeDialog, false)
 }
 
 function timeLeft(){
@@ -210,6 +220,11 @@ function applyFinishGame(){
     document.querySelector('#tried-color').style.backgroundColor = hexColor;
 
     document.querySelector('#guess-button').disabled = true;
+
+    document.querySelectorAll('[data-lucide="copy"]').forEach((copyButton) => {
+        copyButton.classList.remove('hidden');
+    });
+    
 }
 
 function rgbToHex(r, g, b) {
@@ -290,4 +305,16 @@ function copy(){
     var snackbar = document.querySelector("#snackbar");
     snackbar.className = "show";
     setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+}
+
+function toggleMenu(){
+    document.querySelector('#menu').classList.toggle('hidden');
+}
+
+function showDialog(){
+    document.querySelector(`#${this.id.replace('menu', 'dialog')}`).showModal();
+}
+
+function closeDialog(){
+    document.querySelector(`#${this.id}`).close();
 }
