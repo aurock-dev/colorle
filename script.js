@@ -162,45 +162,39 @@ function updateTries(){
 
 function checkIfFinish(rColor, gColor, bColor){
     if (rColor === rColorToGuess && gColor === gColorToGuess && bColor === bColorToGuess){
-        document.querySelector('#state-game-text').textContent = `Yay! You finish in ${tries} tries!`;
-        let hexColor = rgbToHex(rColorToGuess, gColorToGuess, bColorToGuess);
-        document.querySelector('#color-reminder').textContent = `rgb(${rColorToGuess}, ${gColorToGuess}, ${bColorToGuess}) / ${hexColor}`;
-        document.querySelector('#color-reminder-container').classList.remove('hidden');
-
-        document.querySelector('#r-tries-number').textContent = rTries;
-        document.querySelector('#g-tries-number').textContent = gTries;
-        document.querySelector('#b-tries-number').textContent = bTries;
-        document.querySelector('#colors-tries-container').classList.remove('hidden');
-
-        document.querySelector('#guess-button').disabled = true;
         updateLocalStorageWithFinishedData();
+        applyFinishGame();
     }
 }
 
 function checkIfAlreadyFinished(){
     if (getLocalStorage().isFinished === 'true'){
-        document.querySelector('#state-game-text').textContent = `Yay! You finish in ${getLocalStorage().tries} tries!`;
-        let hexColor = rgbToHex(getLocalStorage().rColorToGuess, getLocalStorage().gColorToGuess, getLocalStorage().bColorToGuess);
-        document.querySelector('#color-reminder').textContent = `rgb(${getLocalStorage().rColorToGuess}, ${getLocalStorage().gColorToGuess}, ${getLocalStorage().bColorToGuess}) / ${hexColor}`;
-        document.querySelector('#color-reminder-container').classList.remove('hidden');
-
-        document.querySelector('#r-tries-number').textContent = getLocalStorage().rTries;
-        document.querySelector('#g-tries-number').textContent = getLocalStorage().gTries;
-        document.querySelector('#b-tries-number').textContent = getLocalStorage().bTries;
-        document.querySelector('#colors-tries-container').classList.remove('hidden');
-
-        document.querySelector('#r-color').value = getLocalStorage().rColorToGuess;
-        document.querySelector('#g-color').value = getLocalStorage().gColorToGuess;
-        document.querySelector('#b-color').value = getLocalStorage().bColorToGuess;
-
-        document.querySelector('#r-color-hint').textContent = "✔";
-        document.querySelector('#g-color-hint').textContent = "✔";
-        document.querySelector('#b-color-hint').textContent = "✔";
-
-        document.querySelector('#tried-color').style.backgroundColor = hexColor;
-
-        document.querySelector('#guess-button').disabled = true;
+        applyFinishGame();
     }
+}
+
+function applyFinishGame(){
+    document.querySelector('#state-game-text').textContent = `Yay! You finish in ${getLocalStorage().tries} tries!`;
+    let hexColor = rgbToHex(getLocalStorage().rColorToGuess, getLocalStorage().gColorToGuess, getLocalStorage().bColorToGuess);
+    document.querySelector('#color-reminder').textContent = `rgb(${getLocalStorage().rColorToGuess}, ${getLocalStorage().gColorToGuess}, ${getLocalStorage().bColorToGuess}) / ${hexColor}`;
+    document.querySelector('#color-reminder-container').classList.remove('hidden');
+
+    document.querySelector('#r-tries-number').textContent = getLocalStorage().rTries;
+    document.querySelector('#g-tries-number').textContent = getLocalStorage().gTries;
+    document.querySelector('#b-tries-number').textContent = getLocalStorage().bTries;
+    document.querySelector('#colors-tries-container').classList.remove('hidden');
+
+    document.querySelector('#r-color').value = getLocalStorage().rColorToGuess;
+    document.querySelector('#g-color').value = getLocalStorage().gColorToGuess;
+    document.querySelector('#b-color').value = getLocalStorage().bColorToGuess;
+
+    document.querySelector('#r-color-hint').textContent = "✔";
+    document.querySelector('#g-color-hint').textContent = "✔";
+    document.querySelector('#b-color-hint').textContent = "✔";
+
+    document.querySelector('#tried-color').style.backgroundColor = hexColor;
+
+    document.querySelector('#guess-button').disabled = true;
 }
 
 function rgbToHex(r, g, b) {
