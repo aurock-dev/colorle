@@ -22,6 +22,11 @@ function setupPage(){
     timeLeft();
     lucide.createIcons();
 
+    window.addEventListener('click', (e) => {
+        if (e.target.closest('svg') !== document.querySelector('[data-lucide="menu"]')) {
+            document.querySelector('#menu').classList.add('hidden');
+        }
+    }, false)
     document.querySelector('#guess-button').addEventListener('click', guessedColor, false);
     document.querySelector('#r-range').addEventListener('input', updateInput, false);
     document.querySelector('#g-range').addEventListener('input', updateInput, false);
