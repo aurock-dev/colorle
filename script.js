@@ -39,6 +39,7 @@ function setupPage(){
     document.querySelectorAll('[data-lucide="copy"]').forEach((button) => {
         button.addEventListener('click', copy, false)
     })
+    document.querySelector('[data-lucide="menu"]').addEventListener('click', toggleMenu, false)
 }
 
 function timeLeft(){
@@ -295,4 +296,8 @@ function copy(){
     var snackbar = document.querySelector("#snackbar");
     snackbar.className = "show";
     setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+}
+
+function toggleMenu(){
+    document.querySelector('#menu').classList.toggle('hidden');
 }

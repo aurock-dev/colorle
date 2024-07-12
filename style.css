@@ -234,6 +234,7 @@ body .hidden{
 }
 
 header{
+    position: relative;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -246,7 +247,7 @@ header > div:first-child{
     gap: 0.2em;
 }
 
-header > div:last-child{
+header > div:nth-child(2){
     display: flex;
     gap: 0.2em;
     justify-content: start;
@@ -254,6 +255,12 @@ header > div:last-child{
 
 header div:last-child div{
     min-width: 70px;
+}
+
+.menu{
+    position: absolute;
+    right: 0;
+    top: 100%;
 }
 
 body>div{
@@ -314,7 +321,7 @@ label{
     color: rgba(255,255,255,0.25);
 }
 
-.copyButton:hover{
+.iconButton:hover{
     cursor: pointer;
 }
 
