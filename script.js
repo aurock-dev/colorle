@@ -174,7 +174,7 @@ function checkIfAlreadyFinished(){
 }
 
 function applyFinishGame(){
-    document.querySelector('#state-game-text').textContent = `Yay! You finish in ${getLocalStorage().tries} tries!`;
+    document.querySelector('#state-game-text').textContent = `Yay! You finished in ${getLocalStorage().tries} tries!`;
     let hexColor = rgbToHex(getLocalStorage().rColorToGuess, getLocalStorage().gColorToGuess, getLocalStorage().bColorToGuess);
     document.querySelector('#color-reminder').textContent = `rgb(${getLocalStorage().rColorToGuess}, ${getLocalStorage().gColorToGuess}, ${getLocalStorage().bColorToGuess}) / ${hexColor}`;
     document.querySelector('#color-reminder-container').classList.remove('hidden');
@@ -188,9 +188,21 @@ function applyFinishGame(){
     document.querySelector('#g-color').value = getLocalStorage().gColorToGuess;
     document.querySelector('#b-color').value = getLocalStorage().bColorToGuess;
 
+    document.querySelector('#r-color').disabled = true;
+    document.querySelector('#g-color').disabled = true;
+    document.querySelector('#b-color').disabled = true;
+
     document.querySelector('#r-color-hint').textContent = "✔";
     document.querySelector('#g-color-hint').textContent = "✔";
     document.querySelector('#b-color-hint').textContent = "✔";
+    
+    document.querySelector('#r-range').value = getLocalStorage().rColorToGuess;
+    document.querySelector('#g-range').value = getLocalStorage().gColorToGuess;
+    document.querySelector('#b-range').value = getLocalStorage().bColorToGuess;
+
+    document.querySelector('#r-range').disabled = true;
+    document.querySelector('#g-range').disabled = true;
+    document.querySelector('#b-range').disabled = true;
 
     document.querySelector('#tried-color').style.backgroundColor = hexColor;
 
