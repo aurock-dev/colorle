@@ -170,6 +170,7 @@
     --border-thickness: 2px;
 
     --title-background-color: rgba(0,0,0,0.1);
+    --snackbar-background-color: rgba(0,0,0,0.5);
     --box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.2);
 }
 /* #endregion */
@@ -178,7 +179,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2em;
+    gap: 1.75em;
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -244,7 +245,8 @@ body>div{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    gap: 0.75em;
+    width: 100%;
 }
 
 .triedColor{
@@ -264,6 +266,7 @@ body>div{
     border-radius: 5px;
     padding: 1em 2em;
     background-color: var(--title-background-color);
+    width: max-content;
 }
 
 label{
@@ -278,9 +281,26 @@ label{
 }
 
 .reminderContainer{
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center; 
+    border-radius: 5px;
+    background-color: var(--title-background-color);
+    padding: 1em 4em;
+    max-width: 95%;
+    text-align: center;
+}
+
+.copyButton{
+    position: absolute;
+    top: 0.2em;
+    right: 0.2em;
+    color: rgba(255,255,255,0.25);
+}
+
+.copyButton:hover{
+    cursor: pointer;
 }
 
 [type="number"].rInput:not('disabled'){
@@ -304,4 +324,23 @@ label{
     display: flex;
     width: 100%;
     gap: 1em;
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 200px;
+    margin-left: -100px;
+    background-color: var(--snackbar-background-color);
+    color: var(--default-color);
+    text-align: center;
+    border-radius: 5px;
+    padding: 0.5em;
+    position: fixed;
+    z-index: 1;
+    top: 2em;
+    right: 0.3em;
+}
+
+#snackbar.show {
+    visibility: visible;
 }

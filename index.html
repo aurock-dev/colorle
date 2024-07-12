@@ -71,18 +71,25 @@
         <div>
             <button id="guess-button">GUESS</button>
             <div class="reminderContainer">
-                <div id="state-game-text">Number of tries: <span id="tries-number">0</span></div>
-                <div class="hidden" id="colors-tries-container">
-                    Red tries: <span id="r-tries-number"></span> -
-                    Green tries: <span  id="g-tries-number"></span> -
-                    Blue tries: <span  id="b-tries-number"></span>
+                <i class="copyButton" data-lucide="copy" id="copy-solution"></i>
+                <span name="toCopy">
+                    <div id="state-game-text">Number of tries: <span id="tries-number">0</span></div>
+                    <div class="hidden" id="colors-tries-container">
+                        Red changes: <span id="r-tries-number"></span> -
+                        Green changes: <span  id="g-tries-number"></span> -
+                        Blue changes: <span  id="b-tries-number"></span>
+                    </div>
+                </span>
+            </div>
+            <div class="reminderContainer hidden" id="color-reminder-container">
+                <i class="copyButton" data-lucide="copy" id="copy-solution"></i>
+                <span name="toCopy">
+                    The color to guess was:
+                    <div id="color-reminder"></di>
                 </div>
-            </div>
-            <div class="reminderContainer title hidden" id="color-reminder-container">
-                The color to guess was: 
-                <div id="color-reminder"></di>
-            </div>
+            </span>
         </div>
+        <div id="snackbar">Copied to clipboard!</div>
     </body>
     <script src="script.js"></script>
 </html>

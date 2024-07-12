@@ -36,6 +36,9 @@ function setupPage(){
     document.querySelectorAll('[data-lucide="plus"]').forEach((button) => {
         button.addEventListener('click', plusInput, false)
     })
+    document.querySelectorAll('[data-lucide="copy"]').forEach((button) => {
+        button.addEventListener('click', copy, false)
+    })
 }
 
 function timeLeft(){
@@ -278,4 +281,13 @@ function plusInput(){
     let rangeTarget = document.querySelector(`#${this.id.replace('-plus', '-range')}`);
     let rangeValue = parseInt(rangeTarget.value);
     rangeTarget.value = Math.min(rangeValue + 1, 255);
+}
+
+function copy(){
+    let copyText = this.closest('.reminderContainer').querySelector('[name="toCopy"]');
+    navigator.clipboard.writeText(copyText.textContent);
+
+    var snackbar = document.querySelector("#snackbar");
+    snackbar.className = "show";
+    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
 }
