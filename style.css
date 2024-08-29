@@ -393,3 +393,11 @@ body dialog{
 dialog::backdrop{
     background-color: var(--snackbar-background-color);
 }
+
+.disabledSVG{
+    color: rgba(255,255,255,0.25);
+}
+
+.disabledSVG:hover{
+    cursor: default;
+}

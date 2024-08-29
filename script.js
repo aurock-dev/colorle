@@ -18,10 +18,6 @@ dateNextColor.setHours(0, 0, 0);
 dateNextColor.setDate(dateNextColor.getDate() + 1);
 
 function setupPage(){
-    randomColor();
-    timeLeft();
-    lucide.createIcons();
-
     window.addEventListener('click', (e) => {
         if (e.target.closest('svg') !== document.querySelector('[data-lucide="menu"]')) {
             document.querySelector('#menu').classList.add('hidden');
@@ -32,7 +28,7 @@ function setupPage(){
     document.querySelector('#g-range').addEventListener('input', updateInput, false);
     document.querySelector('#b-range').addEventListener('input', updateInput, false);
     document.querySelectorAll('input[type="number"]').forEach((input) => {
-       input.addEventListener('input', checkInput, false)
+        input.addEventListener('input', checkInput, false)
     });
     
     document.querySelectorAll('[data-lucide="minus"]').forEach((button) => {
@@ -49,6 +45,10 @@ function setupPage(){
         menuElement.addEventListener('click', showDialog, false)  
     });
     document.querySelector('dialog').addEventListener('click', closeDialog, false)
+
+    randomColor();
+    timeLeft();
+    lucide.createIcons();
 }
 
 function timeLeft(){
@@ -207,9 +207,9 @@ function applyFinishGame(){
     document.querySelector('#g-color').disabled = true;
     document.querySelector('#b-color').disabled = true;
 
-    document.querySelector('#r-color-hint').textContent = "✔";
-    document.querySelector('#g-color-hint').textContent = "✔";
-    document.querySelector('#b-color-hint').textContent = "✔";
+    document.querySelector('#r-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
+    document.querySelector('#g-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
+    document.querySelector('#b-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
     
     document.querySelector('#r-range').value = getLocalStorage().rColorToGuess;
     document.querySelector('#g-range').value = getLocalStorage().gColorToGuess;
@@ -218,6 +218,20 @@ function applyFinishGame(){
     document.querySelector('#r-range').disabled = true;
     document.querySelector('#g-range').disabled = true;
     document.querySelector('#b-range').disabled = true;
+    
+    document.querySelector('#r-plus').classList.add('disabledSVG');
+    document.querySelector('#r-minus').classList.add('disabledSVG');
+    document.querySelector('#g-plus').classList.add('disabledSVG');
+    document.querySelector('#g-minus').classList.add('disabledSVG');
+    document.querySelector('#b-plus').classList.add('disabledSVG');
+    document.querySelector('#b-minus').classList.add('disabledSVG');
+
+    document.querySelectorAll('[data-lucide="minus"]').forEach((button) => {
+        button.removeEventListener('click', minusInput)
+    })
+    document.querySelectorAll('[data-lucide="plus"]').forEach((button) => {
+        button.removeEventListener('click', plusInput)
+    })
 
     document.querySelector('#tried-color').style.backgroundColor = hexColor;
 
@@ -281,6 +295,7 @@ function checkInput(){
 }
 
 function minusInput(){
+    console.log('ok')
     let inputTarget = document.querySelector(`#${this.id.replace('-minus', '-color')}`);
     let inputValue = parseInt(inputTarget.value);
     inputTarget.value = Math.max(inputValue - 1, 0);
