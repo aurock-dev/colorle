@@ -118,53 +118,56 @@ function compareColors(rColor, gColor, bColor){
 
 function compareRColor(rColor){
     if (rColor > rColorToGuess){
-        document.querySelector('#r-color-hint').textContent = "↓";
+        document.querySelector('#r-color-hint').innerHTML = "<i data-lucide='trending-down'></i>";
     }
     else if (rColor < rColorToGuess){
-        document.querySelector('#r-color-hint').textContent = "↑";
+        document.querySelector('#r-color-hint').innerHTML = "<i data-lucide='trending-up'></i>";
     }
     else{
-        document.querySelector('#r-color-hint').textContent = "✔";
+        document.querySelector('#r-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
     }
 
     if (rColor !== previousRColor){
         rTries += 1;
         previousRColor = rColor;
     }
+    lucide.createIcons();
 }
 
 function compareGColor(gColor){
     if (gColor > gColorToGuess){
-        document.querySelector('#g-color-hint').textContent = "↓";
+        document.querySelector('#g-color-hint').innerHTML = "<i data-lucide='trending-down'></i>";
     }
     else if (gColor < gColorToGuess){
-        document.querySelector('#g-color-hint').textContent = "↑";
+        document.querySelector('#g-color-hint').innerHTML = "<i data-lucide='trending-up'></i>";
     }
     else{
-        document.querySelector('#g-color-hint').textContent = "✔";
+        document.querySelector('#g-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
     }
 
     if (gColor !== previousGColor){
         gTries += 1;
         previousGColor = gColor;
     }
+    lucide.createIcons();
 }
 
 function compareBColor(bColor){
     if (bColor > bColorToGuess){
-        document.querySelector('#b-color-hint').textContent = "↓";
+        document.querySelector('#b-color-hint').innerHTML = "<i data-lucide='trending-down'></i>";
     }
     else if (bColor < bColorToGuess){
-        document.querySelector('#b-color-hint').textContent = "↑";
+        document.querySelector('#b-color-hint').innerHTML = "<i data-lucide='trending-up'></i>";
     }
     else{
-        document.querySelector('#b-color-hint').textContent = "✔";
+        document.querySelector('#b-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
     }
 
     if (bColor !== previousBColor){
         bTries += 1;
         previousBColor = bColor;
     }
+    lucide.createIcons();
 }
 
 function updateTries(){
