@@ -17,10 +17,12 @@ let dateNextColor = new Date;
 dateNextColor.setHours(0, 0, 0);
 dateNextColor.setDate(dateNextColor.getDate() + 1);
 
+let buttonPressTimer;
+let buttonPressTimerValue = 75;
+
 function setupPage(){
-    randomColor();
-    timeLeft();
     lucide.createIcons();
+    createEventListenerForPlusMinus();
 
     window.addEventListener('click', (e) => {
         if (e.target.closest('svg') !== document.querySelector('[data-lucide="menu"]')) {
@@ -32,15 +34,8 @@ function setupPage(){
     document.querySelector('#g-range').addEventListener('input', updateInput, false);
     document.querySelector('#b-range').addEventListener('input', updateInput, false);
     document.querySelectorAll('input[type="number"]').forEach((input) => {
-       input.addEventListener('input', checkInput, false)
+        input.addEventListener('input', checkInput, false)
     });
-    
-    document.querySelectorAll('[data-lucide="minus"]').forEach((button) => {
-        button.addEventListener('click', minusInput, false)
-    })
-    document.querySelectorAll('[data-lucide="plus"]').forEach((button) => {
-        button.addEventListener('click', plusInput, false)
-    })
     document.querySelectorAll('[data-lucide="copy"]').forEach((button) => {
         button.addEventListener('click', copy, false)
     })
@@ -49,6 +44,9 @@ function setupPage(){
         menuElement.addEventListener('click', showDialog, false)  
     });
     document.querySelector('dialog').addEventListener('click', closeDialog, false)
+
+    randomColor();
+    timeLeft();
 }
 
 function timeLeft(){
@@ -104,7 +102,6 @@ function guessedColor(){
 
     let color = `rgb(${rColor}, ${gColor}, ${bColor})`;
     document.querySelector('#tried-color').style.backgroundColor = color;
-    document.querySelector('#tried-color').style.color = (rColor * 0.299 + gColor * 0.587 + bColor * 0.114) > 186 ? "#000000" : "#ffffff";
 
     compareColors(rColor, gColor, bColor);
     updateTries();
@@ -115,17 +112,19 @@ function compareColors(rColor, gColor, bColor){
     compareRColor(rColor);
     compareGColor(gColor);
     compareBColor(bColor);
+    lucide.createIcons();
+    createEventListenerForPlusMinus();
 }
 
 function compareRColor(rColor){
     if (rColor > rColorToGuess){
-        document.querySelector('#r-color-hint').textContent = "↓";
+        document.querySelector('#r-color-hint').innerHTML = "<i data-lucide='trending-down'></i>";
     }
     else if (rColor < rColorToGuess){
-        document.querySelector('#r-color-hint').textContent = "↑";
+        document.querySelector('#r-color-hint').innerHTML = "<i data-lucide='trending-up'></i>";
     }
     else{
-        document.querySelector('#r-color-hint').textContent = "✔";
+        document.querySelector('#r-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
     }
 
     if (rColor !== previousRColor){
@@ -136,13 +135,13 @@ function compareRColor(rColor){
 
 function compareGColor(gColor){
     if (gColor > gColorToGuess){
-        document.querySelector('#g-color-hint').textContent = "↓";
+        document.querySelector('#g-color-hint').innerHTML = "<i data-lucide='trending-down'></i>";
     }
     else if (gColor < gColorToGuess){
-        document.querySelector('#g-color-hint').textContent = "↑";
+        document.querySelector('#g-color-hint').innerHTML = "<i data-lucide='trending-up'></i>";
     }
     else{
-        document.querySelector('#g-color-hint').textContent = "✔";
+        document.querySelector('#g-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
     }
 
     if (gColor !== previousGColor){
@@ -153,13 +152,13 @@ function compareGColor(gColor){
 
 function compareBColor(bColor){
     if (bColor > bColorToGuess){
-        document.querySelector('#b-color-hint').textContent = "↓";
+        document.querySelector('#b-color-hint').innerHTML = "<i data-lucide='trending-down'></i>";
     }
     else if (bColor < bColorToGuess){
-        document.querySelector('#b-color-hint').textContent = "↑";
+        document.querySelector('#b-color-hint').innerHTML = "<i data-lucide='trending-up'></i>";
     }
     else{
-        document.querySelector('#b-color-hint').textContent = "✔";
+        document.querySelector('#b-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
     }
 
     if (bColor !== previousBColor){
@@ -205,9 +204,9 @@ function applyFinishGame(){
     document.querySelector('#g-color').disabled = true;
     document.querySelector('#b-color').disabled = true;
 
-    document.querySelector('#r-color-hint').textContent = "✔";
-    document.querySelector('#g-color-hint').textContent = "✔";
-    document.querySelector('#b-color-hint').textContent = "✔";
+    document.querySelector('#r-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
+    document.querySelector('#g-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
+    document.querySelector('#b-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
     
     document.querySelector('#r-range').value = getLocalStorage().rColorToGuess;
     document.querySelector('#g-range').value = getLocalStorage().gColorToGuess;
@@ -216,6 +215,20 @@ function applyFinishGame(){
     document.querySelector('#r-range').disabled = true;
     document.querySelector('#g-range').disabled = true;
     document.querySelector('#b-range').disabled = true;
+    
+    document.querySelector('#r-plus-svg').classList.add('disabledSVG');
+    document.querySelector('#r-minus-svg').classList.add('disabledSVG');
+    document.querySelector('#g-plus').classList.add('disabledSVG');
+    document.querySelector('#g-minus').classList.add('disabledSVG');
+    document.querySelector('#b-plus').classList.add('disabledSVG');
+    document.querySelector('#b-minus').classList.add('disabledSVG');
+
+    document.querySelectorAll('[data-lucide="minus"]').forEach((button) => {
+        button.removeEventListener('click', minusInput)
+    })
+    document.querySelectorAll('[data-lucide="plus"]').forEach((button) => {
+        button.removeEventListener('click', plusInput)
+    })
 
     document.querySelector('#tried-color').style.backgroundColor = hexColor;
 
@@ -278,22 +291,22 @@ function checkInput(){
     this.value = Math.min(255, Math.max(0, this.value));
 }
 
-function minusInput(){
-    let inputTarget = document.querySelector(`#${this.id.replace('-minus', '-color')}`);
+function minusInput(buttonId){
+    let inputTarget = document.querySelector(`#${buttonId.replace('-minus', '-color')}`);
     let inputValue = parseInt(inputTarget.value);
     inputTarget.value = Math.max(inputValue - 1, 0);
     
-    let rangeTarget = document.querySelector(`#${this.id.replace('-minus', '-range')}`);
+    let rangeTarget = document.querySelector(`#${buttonId.replace('-minus', '-range')}`);
     let rangeValue = parseInt(rangeTarget.value);
     rangeTarget.value = Math.max(rangeValue - 1, 0);
 }
 
-function plusInput(){
-    let inputTarget = document.querySelector(`#${this.id.replace('-plus', '-color')}`);
+function plusInput(buttonId){
+    let inputTarget = document.querySelector(`#${buttonId.replace('-plus', '-color')}`);
     let inputValue = parseInt(inputTarget.value);
     inputTarget.value = Math.min(inputValue + 1, 255);
     
-    let rangeTarget = document.querySelector(`#${this.id.replace('-plus', '-range')}`);
+    let rangeTarget = document.querySelector(`#${buttonId.replace('-plus', '-range')}`);
     let rangeValue = parseInt(rangeTarget.value);
     rangeTarget.value = Math.min(rangeValue + 1, 255);
 }
@@ -317,4 +330,50 @@ function showDialog(){
 
 function closeDialog(){
     document.querySelector(`#${this.id}`).close();
+}
+
+function createEventListenerForPlusMinus(){
+    document.querySelectorAll('[name="minus-button"]').forEach((button) => {
+        button.addEventListener('click', function(){
+            minusInput(button.id);
+        }, false)
+        
+        button.addEventListener('mouseup', resetPressTimer, false)
+        button.addEventListener('mousedown', function(){
+            buttonPressTimer = setInterval(function(){
+                minusInput(button.id);
+            }, buttonPressTimerValue)
+        }, false)
+
+        button.addEventListener('touchend', resetPressTimer, false)
+        button.addEventListener('touchstart', function(){
+            buttonPressTimer = setInterval(function(){
+                minusInput(button.id);
+            }, buttonPressTimerValue)
+        }, false)
+    })
+
+    document.querySelectorAll('[name="plus-button"]').forEach((button) => {
+        button.addEventListener('click', function(){
+            plusInput(button.id);
+        }, false)
+
+        button.addEventListener('mouseup', resetPressTimer, false)
+        button.addEventListener('mousedown', function(){
+            buttonPressTimer = setInterval(function(){
+                plusInput(button.id);
+            }, buttonPressTimerValue)
+        }, false)
+
+        button.addEventListener('touchend', resetPressTimer, false)
+        button.addEventListener('touchstart', function(){
+            buttonPressTimer = setInterval(function(){
+                plusInput(button.id);
+            }, buttonPressTimerValue)
+        }, false)
+    })
+}
+ 
+function resetPressTimer(){
+    clearInterval(buttonPressTimer);
 }

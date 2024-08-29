@@ -183,6 +183,7 @@ body{
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
+    user-select: none;
 }
 
 button{
@@ -241,6 +242,7 @@ header{
     padding: 0.2em 0.5em;
     background-color: var(--header-color);
     box-shadow: var(--box-shadow);
+    color: var(--default-color);
 }
 
 header > div:first-child{
@@ -391,4 +393,12 @@ body dialog{
 
 dialog::backdrop{
     background-color: var(--snackbar-background-color);
+}
+
+.disabledSVG{
+    color: rgba(255,255,255,0.25);
+}
+
+.disabledSVG:hover{
+    cursor: default;
 }
