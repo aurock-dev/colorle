@@ -18,6 +18,9 @@ dateNextColor.setHours(0, 0, 0);
 dateNextColor.setDate(dateNextColor.getDate() + 1);
 
 function setupPage(){
+    lucide.createIcons();
+    createEventListenerForPlusMinus();
+
     window.addEventListener('click', (e) => {
         if (e.target.closest('svg') !== document.querySelector('[data-lucide="menu"]')) {
             document.querySelector('#menu').classList.add('hidden');
@@ -30,13 +33,6 @@ function setupPage(){
     document.querySelectorAll('input[type="number"]').forEach((input) => {
         input.addEventListener('input', checkInput, false)
     });
-    
-    document.querySelectorAll('[data-lucide="minus"]').forEach((button) => {
-        button.addEventListener('click', minusInput, false)
-    })
-    document.querySelectorAll('[data-lucide="plus"]').forEach((button) => {
-        button.addEventListener('click', plusInput, false)
-    })
     document.querySelectorAll('[data-lucide="copy"]').forEach((button) => {
         button.addEventListener('click', copy, false)
     })
@@ -48,7 +44,6 @@ function setupPage(){
 
     randomColor();
     timeLeft();
-    lucide.createIcons();
 }
 
 function timeLeft(){
@@ -114,6 +109,8 @@ function compareColors(rColor, gColor, bColor){
     compareRColor(rColor);
     compareGColor(gColor);
     compareBColor(bColor);
+    lucide.createIcons();
+    createEventListenerForPlusMinus();
 }
 
 function compareRColor(rColor){
@@ -131,7 +128,6 @@ function compareRColor(rColor){
         rTries += 1;
         previousRColor = rColor;
     }
-    lucide.createIcons();
 }
 
 function compareGColor(gColor){
@@ -149,7 +145,6 @@ function compareGColor(gColor){
         gTries += 1;
         previousGColor = gColor;
     }
-    lucide.createIcons();
 }
 
 function compareBColor(bColor){
@@ -167,7 +162,6 @@ function compareBColor(bColor){
         bTries += 1;
         previousBColor = bColor;
     }
-    lucide.createIcons();
 }
 
 function updateTries(){
@@ -295,7 +289,6 @@ function checkInput(){
 }
 
 function minusInput(){
-    console.log('ok')
     let inputTarget = document.querySelector(`#${this.id.replace('-minus', '-color')}`);
     let inputValue = parseInt(inputTarget.value);
     inputTarget.value = Math.max(inputValue - 1, 0);
@@ -334,4 +327,13 @@ function showDialog(){
 
 function closeDialog(){
     document.querySelector(`#${this.id}`).close();
+}
+
+function createEventListenerForPlusMinus(){
+    document.querySelectorAll('[data-lucide="minus"]').forEach((button) => {
+        button.addEventListener('click', minusInput, false)
+    })
+    document.querySelectorAll('[data-lucide="plus"]').forEach((button) => {
+        button.addEventListener('click', plusInput, false)
+    })
 }
