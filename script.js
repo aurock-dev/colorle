@@ -17,6 +17,9 @@ let dateNextColor = new Date;
 dateNextColor.setHours(0, 0, 0);
 dateNextColor.setDate(dateNextColor.getDate() + 1);
 
+let buttonPressTimer;
+let buttonPressTimerValue = 75;
+
 function setupPage(){
     lucide.createIcons();
     createEventListenerForPlusMinus();
@@ -213,8 +216,8 @@ function applyFinishGame(){
     document.querySelector('#g-range').disabled = true;
     document.querySelector('#b-range').disabled = true;
     
-    document.querySelector('#r-plus').classList.add('disabledSVG');
-    document.querySelector('#r-minus').classList.add('disabledSVG');
+    document.querySelector('#r-plus-svg').classList.add('disabledSVG');
+    document.querySelector('#r-minus-svg').classList.add('disabledSVG');
     document.querySelector('#g-plus').classList.add('disabledSVG');
     document.querySelector('#g-minus').classList.add('disabledSVG');
     document.querySelector('#b-plus').classList.add('disabledSVG');
@@ -288,22 +291,22 @@ function checkInput(){
     this.value = Math.min(255, Math.max(0, this.value));
 }
 
-function minusInput(){
-    let inputTarget = document.querySelector(`#${this.id.replace('-minus', '-color')}`);
+function minusInput(buttonId){
+    let inputTarget = document.querySelector(`#${buttonId.replace('-minus', '-color')}`);
     let inputValue = parseInt(inputTarget.value);
     inputTarget.value = Math.max(inputValue - 1, 0);
     
-    let rangeTarget = document.querySelector(`#${this.id.replace('-minus', '-range')}`);
+    let rangeTarget = document.querySelector(`#${buttonId.replace('-minus', '-range')}`);
     let rangeValue = parseInt(rangeTarget.value);
     rangeTarget.value = Math.max(rangeValue - 1, 0);
 }
 
-function plusInput(){
-    let inputTarget = document.querySelector(`#${this.id.replace('-plus', '-color')}`);
+function plusInput(buttonId){
+    let inputTarget = document.querySelector(`#${buttonId.replace('-plus', '-color')}`);
     let inputValue = parseInt(inputTarget.value);
     inputTarget.value = Math.min(inputValue + 1, 255);
     
-    let rangeTarget = document.querySelector(`#${this.id.replace('-plus', '-range')}`);
+    let rangeTarget = document.querySelector(`#${buttonId.replace('-plus', '-range')}`);
     let rangeValue = parseInt(rangeTarget.value);
     rangeTarget.value = Math.min(rangeValue + 1, 255);
 }
@@ -330,10 +333,47 @@ function closeDialog(){
 }
 
 function createEventListenerForPlusMinus(){
-    document.querySelectorAll('[data-lucide="minus"]').forEach((button) => {
-        button.addEventListener('click', minusInput, false)
+    document.querySelectorAll('[name="minus-button"]').forEach((button) => {
+        button.addEventListener('click', function(){
+            minusInput(button.id);
+        }, false)
+        
+        button.addEventListener('mouseup', resetPressTimer, false)
+        button.addEventListener('mousedown', function(){
+            buttonPressTimer = setInterval(function(){
+                minusInput(button.id);
+            }, buttonPressTimerValue)
+        }, false)
+
+        button.addEventListener('touchend', resetPressTimer, false)
+        button.addEventListener('touchstart', function(){
+            buttonPressTimer = setInterval(function(){
+                minusInput(button.id);
+            }, buttonPressTimerValue)
+        }, false)
     })
-    document.querySelectorAll('[data-lucide="plus"]').forEach((button) => {
-        button.addEventListener('click', plusInput, false)
+
+    document.querySelectorAll('[name="plus-button"]').forEach((button) => {
+        button.addEventListener('click', function(){
+            plusInput(button.id);
+        }, false)
+
+        button.addEventListener('mouseup', resetPressTimer, false)
+        button.addEventListener('mousedown', function(){
+            buttonPressTimer = setInterval(function(){
+                plusInput(button.id);
+            }, buttonPressTimerValue)
+        }, false)
+
+        button.addEventListener('touchend', resetPressTimer, false)
+        button.addEventListener('touchstart', function(){
+            buttonPressTimer = setInterval(function(){
+                plusInput(button.id);
+            }, buttonPressTimerValue)
+        }, false)
     })
+}
+ 
+function resetPressTimer(){
+    clearInterval(buttonPressTimer);
 }
