@@ -241,6 +241,7 @@ header{
     padding: 0.2em 0.5em;
     background-color: var(--header-color);
     box-shadow: var(--box-shadow);
+    color: var(--default-color);
 }
 
 header > div:first-child{
