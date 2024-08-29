@@ -104,7 +104,6 @@ function guessedColor(){
 
     let color = `rgb(${rColor}, ${gColor}, ${bColor})`;
     document.querySelector('#tried-color').style.backgroundColor = color;
-    document.querySelector('#tried-color').style.color = (rColor * 0.299 + gColor * 0.587 + bColor * 0.114) > 186 ? "#000000" : "#ffffff";
 
     compareColors(rColor, gColor, bColor);
     updateTries();
