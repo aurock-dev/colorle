@@ -113,18 +113,18 @@ function compareColors(rColor, gColor, bColor){
     compareGColor(gColor);
     compareBColor(bColor);
     lucide.createIcons();
-    createEventListenerForPlusMinus();
+    // createEventListenerForPlusMinus();
 }
 
 function compareRColor(rColor){
     if (rColor > rColorToGuess){
-        document.querySelector('#r-color-hint').innerHTML = "<i data-lucide='trending-down'></i>";
+        toHintDown('r');
     }
     else if (rColor < rColorToGuess){
-        document.querySelector('#r-color-hint').innerHTML = "<i data-lucide='trending-up'></i>";
+        toHintUp('r');
     }
     else{
-        document.querySelector('#r-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
+        toHintCheck('r');
     }
 
     if (rColor !== previousRColor){
@@ -135,13 +135,13 @@ function compareRColor(rColor){
 
 function compareGColor(gColor){
     if (gColor > gColorToGuess){
-        document.querySelector('#g-color-hint').innerHTML = "<i data-lucide='trending-down'></i>";
+        toHintDown('g');
     }
     else if (gColor < gColorToGuess){
-        document.querySelector('#g-color-hint').innerHTML = "<i data-lucide='trending-up'></i>";
+        toHintUp('g');
     }
     else{
-        document.querySelector('#g-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
+        toHintCheck('g');
     }
 
     if (gColor !== previousGColor){
@@ -152,19 +152,38 @@ function compareGColor(gColor){
 
 function compareBColor(bColor){
     if (bColor > bColorToGuess){
-        document.querySelector('#b-color-hint').innerHTML = "<i data-lucide='trending-down'></i>";
+        toHintDown('b');
     }
     else if (bColor < bColorToGuess){
-        document.querySelector('#b-color-hint').innerHTML = "<i data-lucide='trending-up'></i>";
+        toHintUp('b');
     }
     else{
-        document.querySelector('#b-color-hint').innerHTML = "<i data-lucide='badge-check'></i>";
+        toHintCheck('b');
     }
 
     if (bColor !== previousBColor){
         bTries += 1;
         previousBColor = bColor;
     }
+}
+
+function toHintUp(color){
+    document.querySelector(`#${color}-color-hint`).innerHTML = "<i data-lucide='trending-up'></i>";
+}
+
+function toHintDown(color){
+    document.querySelector(`#${color}-color-hint`).innerHTML = "<i data-lucide='trending-down'></i>";
+}
+
+function toHintCheck(color){
+    document.querySelector(`#${color}-color-hint`).innerHTML = "<i data-lucide='badge-check'></i>";
+    document.querySelector(`#${color}-plus-svg`).classList.add('disabledSVG');
+    document.querySelector(`#${color}-minus-svg`).classList.add('disabledSVG');
+    document.querySelector(`#${color}-plus`).removeEventListener('click', plusInput);
+    document.querySelector(`#${color}-minus`).removeEventListener('click', minusInput);
+    document.querySelector(`#${color}-minus`).removeEventListener('long-press', longPress);
+    document.querySelector(`#${color}-range`).disabled = true;
+    document.querySelector(`#${color}-color`).disabled = true;
 }
 
 function updateTries(){
@@ -291,24 +310,31 @@ function checkInput(){
     this.value = Math.min(255, Math.max(0, this.value));
 }
 
-function minusInput(buttonId){
-    let inputTarget = document.querySelector(`#${buttonId.replace('-minus', '-color')}`);
+function minusInput(e){
+    let inputTarget = document.querySelector(`#${e.currentTarget.buttonId.replace('-minus', '-color')}`);
     let inputValue = parseInt(inputTarget.value);
     inputTarget.value = Math.max(inputValue - 1, 0);
     
-    let rangeTarget = document.querySelector(`#${buttonId.replace('-minus', '-range')}`);
+    let rangeTarget = document.querySelector(`#${e.currentTarget.buttonId.replace('-minus', '-range')}`);
     let rangeValue = parseInt(rangeTarget.value);
     rangeTarget.value = Math.max(rangeValue - 1, 0);
 }
 
-function plusInput(buttonId){
-    let inputTarget = document.querySelector(`#${buttonId.replace('-plus', '-color')}`);
+function plusInput(e){
+    let inputTarget = document.querySelector(`#${e.currentTarget.buttonId.replace('-plus', '-color')}`);
     let inputValue = parseInt(inputTarget.value);
     inputTarget.value = Math.min(inputValue + 1, 255);
     
-    let rangeTarget = document.querySelector(`#${buttonId.replace('-plus', '-range')}`);
+    let rangeTarget = document.querySelector(`#${e.currentTarget.buttonId.replace('-plus', '-range')}`);
     let rangeValue = parseInt(rangeTarget.value);
     rangeTarget.value = Math.min(rangeValue + 1, 255);
+}
+
+function longPress(e){
+    buttonId = e.currentTarget.id;
+    buttonPressTimer = setInterval(function(){
+        document.querySelector(`#${buttonId}`).click();
+    }, buttonPressTimerValue)
 }
 
 function copy(){
@@ -334,30 +360,18 @@ function closeDialog(){
 
 function createEventListenerForPlusMinus(){
     document.querySelectorAll('[name="minus-button"]').forEach((button) => {
-        button.addEventListener('click', function(){
-            minusInput(button.id);
-        }, false)
-
-        button.addEventListener('long-press', function(){
-            buttonPressTimer = setInterval(function(){
-                minusInput(button.id);
-            }, buttonPressTimerValue)
-        }, false)
+        button.addEventListener('click', minusInput, false);
+        button.addEventListener('long-press', longPress, false)
+        button.buttonId = button.id;
         
         button.addEventListener('mouseup', resetPressTimer, false)
         button.addEventListener('touchend', resetPressTimer, false)
     })
 
     document.querySelectorAll('[name="plus-button"]').forEach((button) => {
-        button.addEventListener('click', function(){
-            plusInput(button.id);
-        }, false)
-
-        button.addEventListener('long-press', function(){
-            buttonPressTimer = setInterval(function(){
-                plusInput(button.id);
-            }, buttonPressTimerValue)
-        }, false)
+        button.addEventListener('click', plusInput, false);
+        button.addEventListener('long-press', longPress, false)
+        button.buttonId = button.id;
         
         button.addEventListener('mouseup', resetPressTimer, false)
         button.addEventListener('touchend', resetPressTimer, false)
