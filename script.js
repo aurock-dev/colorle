@@ -18,7 +18,7 @@ dateNextColor.setHours(0, 0, 0);
 dateNextColor.setDate(dateNextColor.getDate() + 1);
 
 let buttonPressTimer;
-let buttonPressTimerValue = 75;
+let buttonPressTimerValue = 40;
 
 function setupPage(){
     lucide.createIcons();
@@ -337,20 +337,15 @@ function createEventListenerForPlusMinus(){
         button.addEventListener('click', function(){
             minusInput(button.id);
         }, false)
+
+        button.addEventListener('long-press', function(){
+            buttonPressTimer = setInterval(function(){
+                minusInput(button.id);
+            }, buttonPressTimerValue)
+        }, false)
         
         button.addEventListener('mouseup', resetPressTimer, false)
-        button.addEventListener('mousedown', function(){
-            buttonPressTimer = setInterval(function(){
-                minusInput(button.id);
-            }, buttonPressTimerValue)
-        }, false)
-
         button.addEventListener('touchend', resetPressTimer, false)
-        button.addEventListener('touchstart', function(){
-            buttonPressTimer = setInterval(function(){
-                minusInput(button.id);
-            }, buttonPressTimerValue)
-        }, false)
     })
 
     document.querySelectorAll('[name="plus-button"]').forEach((button) => {
@@ -358,19 +353,14 @@ function createEventListenerForPlusMinus(){
             plusInput(button.id);
         }, false)
 
+        button.addEventListener('long-press', function(){
+            buttonPressTimer = setInterval(function(){
+                plusInput(button.id);
+            }, buttonPressTimerValue)
+        }, false)
+        
         button.addEventListener('mouseup', resetPressTimer, false)
-        button.addEventListener('mousedown', function(){
-            buttonPressTimer = setInterval(function(){
-                plusInput(button.id);
-            }, buttonPressTimerValue)
-        }, false)
-
         button.addEventListener('touchend', resetPressTimer, false)
-        button.addEventListener('touchstart', function(){
-            buttonPressTimer = setInterval(function(){
-                plusInput(button.id);
-            }, buttonPressTimerValue)
-        }, false)
     })
 }
  
